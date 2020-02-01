@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const request = require('request');
-var http_url = 'http://localhost:4000/api/users';
+var SERVER_API_URL = 'http://localhost:4000/api/users';
 
 /* GET ALL USERS */
 router.get('/', function(req, res, next) { 
-    request(http_url,  (error, response, users) => {
+    request(SERVER_API_URL,  (error, response, users) => {
 	if(error) {
 	    // If there is an error, tell the user 
 	    res.json({
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 /* SAVE USER */
 router.post('/', function(req, res, next) {  
 	 request.post({
-		url: http_url,
+		url: SERVER_API_URL,
 		json: true,
 		body: {
 		    firstname: req.body.firstname,
@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 
 /* GET SINGLE USER BY ID */
 router.get('/:id', function(req, res, next) {  
-    request(http_url + '/' + req.params.id,  (error, response, user) => {
+    request(SERVER_API_URL + '/' + req.params.id,  (error, response, user) => {
 	if(error) {
 	    // If there is an error, tell the user 
 	    res.json({
@@ -58,7 +58,7 @@ router.get('/:id', function(req, res, next) {
 
 /* UPDATE USER */
 router.put('/:id', function(req, res, next) {  
-    request.put(http_url + '/' + req.params.id,  req.body, (error, response, user) => {
+    request.put(SERVER_API_URL + '/' + req.params.id,  req.body, (error, response, user) => {
 	if(error) {
 	    // If there is an error, tell the user 
 	    res.json({
@@ -76,7 +76,7 @@ router.put('/:id', function(req, res, next) {
 
 /* DELETE USER */
 router.delete('/:id', function(req, res, next) { 
-    request.delete(http_url + '/' + req.params.id,  (error, response, user) => {
+    request.delete(SERVER_API_URL + '/' + req.params.id,  (error, response, user) => {
 	if(error) {
 	    // If there is an error, tell the user 
 	    res.json({
